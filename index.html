@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boda de Jorge y Bárbara</title>
     <style>
-        /* Efectos globales */
         body {
             font-family: Arial, sans-serif;
             background-color: #fff8f0; /* Fondo blanco suave */
-            color: #6f4f1e; /* Color del texto en tonos marrones/dorados */
+            color: #6f4f1e;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ffcc33, #b78c46);
         }
 
         header {
@@ -20,7 +18,6 @@
             color: white;
             padding: 20px 0;
             text-align: center;
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombras para dar profundidad */
             text-transform: uppercase;
             font-weight: bold;
         }
@@ -28,7 +25,7 @@
         h1 {
             margin: 0;
             font-size: 40px;
-            text-shadow: 0 0 8px #ffd700, 0 0 12px #ffd700;
+            text-shadow: 0 0 8px #ffd700;
         }
 
         .container {
@@ -41,39 +38,28 @@
             margin-bottom: 40px;
         }
 
-        .gallery {
+        .carousel {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            position: relative;
         }
 
-        .gallery img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
+        .carousel img {
+            width: 100%;
+            display: none;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .carousel img.active {
+            display: block;
         }
 
         .form-container {
             text-align: center;
-            margin-top: 40px;
-        }
-
-        .form-container input[type="file"] {
-            padding: 10px;
-            margin: 20px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            background: linear-gradient(135deg, #b78c46, #ffd700);
-            color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            box-shadow: 0 -8px 12px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
         }
 
         .button {
@@ -85,13 +71,23 @@
             border-radius: 5px;
             cursor: pointer;
             text-transform: uppercase;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s ease-in-out;
         }
 
         .button:hover {
             background-color: #ffd700;
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
+        }
+
+        .rsvp {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff0e0;
+            margin-top: 40px;
+            border-radius: 10px;
+        }
+
+        .rsvp input {
+            padding: 10px;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -102,20 +98,17 @@
     </header>
     
     <div class="container">
-        <!-- Sección de la galería de fotos movida arriba -->
         <section>
             <h2>Galería de Fotos</h2>
-            <div class="gallery" id="photo-gallery">
-                <!-- Aquí se mostrarán las fotos subidas -->
+            <div class="carousel" id="photo-carousel">
+                <!-- Imágenes agregadas dinámicamente -->
             </div>
             <div class="form-container">
-                <h3>Sube tus fotos aquí</h3>
                 <input type="file" id="photo-upload" accept="image/*">
                 <button class="button" onclick="uploadPhoto()">Subir Foto</button>
             </div>
         </section>
 
-        <!-- Detalles del evento -->
         <section>
             <h2>Detalles del Evento</h2>
             <p><strong>Novios:</strong> Jorge Castillo &amp; Bárbara Quevedo</p>
@@ -125,18 +118,20 @@
             <p><strong>Dirección:</strong> A establecer</p>
             <p><strong>Lugar de la celebración:</strong> A establecer</p>
             <p><strong>Confirmación:</strong> Antes del 20 de julio de 2025</p>
-            <p><strong>Enviar confirmación a:</strong> <a href="mailto:jorge.djin@gmail.com" style="color: #b78c46;">jorge.djin@gmail.com</a></p>
         </section>
     </div>
-    
-    <footer>
-        <p>&copy; 2025 Boda de Jorge & Bárbara. Todos los derechos reservados.</p>
-    </footer>
+
+    <div class="rsvp">
+        <h2>Confirma tu Asistencia</h2>
+        <input type="text" id="guest-name" placeholder="Tu Nombre">
+        <button class="button" onclick="confirmAttendance()">Confirmar</button>
+        <ul id="guest-list"></ul>
+    </div>
 
     <script>
         function uploadPhoto() {
             const fileInput = document.getElementById('photo-upload');
-            const gallery = document.getElementById('photo-gallery');
+            const carousel = document.getElementById('photo-carousel');
             const file = fileInput.files[0];
             
             if (file) {
@@ -144,11 +139,33 @@
                 reader.onload = function(event) {
                     const imgElement = document.createElement('img');
                     imgElement.src = event.target.result;
-                    gallery.appendChild(imgElement);
+                    imgElement.classList.add('active');
+                    
+                    const existingImages = carousel.getElementsByTagName('img');
+                    if (existingImages.length > 0) {
+                        existingImages[0].classList.remove('active');
+                    }
+                    
+                    carousel.appendChild(imgElement);
                 };
                 reader.readAsDataURL(file);
             } else {
                 alert("Por favor, selecciona una foto primero.");
+            }
+        }
+
+        function confirmAttendance() {
+            const nameInput = document.getElementById('guest-name');
+            const guestList = document.getElementById('guest-list');
+            const name = nameInput.value.trim();
+
+            if (name) {
+                const listItem = document.createElement('li');
+                listItem.textContent = name;
+                guestList.appendChild(listItem);
+                nameInput.value = "";
+            } else {
+                alert("Por favor, ingresa tu nombre.");
             }
         }
     </script>
