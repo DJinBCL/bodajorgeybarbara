@@ -3,145 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Boda Jorge y Barbar</title>
+    <title>Boda de Jorge y Bárbara</title>
     <style>
+        /* Efectos globales */
         body {
             font-family: Arial, sans-serif;
-            background-color: white;
-            color: #333;
+            background-color: #fff8f0; /* Fondo blanco suave */
+            color: #6f4f1e; /* Color del texto en tonos marrones/dorados */
             margin: 0;
             padding: 0;
+            background: linear-gradient(135deg, #ffcc33, #b78c46);
         }
 
         header {
-            background-color: gold;
+            background: linear-gradient(135deg, #ffd700, #b78c46);
             color: white;
-            padding: 20px;
+            padding: 20px 0;
             text-align: center;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Sombras para dar profundidad */
+            text-transform: uppercase;
+            font-weight: bold;
         }
 
         h1 {
             margin: 0;
-            font-size: 2.5em;
+            font-size: 40px;
+            text-shadow: 0 0 8px #ffd700, 0 0 12px #ffd700;
         }
 
-        .content {
-            padding: 20px;
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
         }
 
-        .details, .confirmation {
-            margin-bottom: 30px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f8f8f8;
-        }
-
-        .details h2, .confirmation h2 {
-            color: gold;
+        section {
+            margin-bottom: 40px;
         }
 
         .gallery {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 10px;
         }
 
         .gallery img {
-            width: 100%;
-            max-width: 200px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .upload-section {
-            margin-bottom: 30px;
+        .form-container {
+            text-align: center;
+            margin-top: 40px;
         }
 
-        .upload-section h2 {
-            color: gold;
-        }
-
-        .upload-section input[type="file"] {
-            margin-top: 10px;
+        .form-container input[type="file"] {
             padding: 10px;
+            margin: 20px;
         }
 
         footer {
-            background-color: gold;
-            color: white;
             text-align: center;
-            padding: 10px;
+            padding: 15px;
+            background: linear-gradient(135deg, #b78c46, #ffd700);
+            color: white;
             position: fixed;
             width: 100%;
             bottom: 0;
+            box-shadow: 0 -8px 12px rgba(0, 0, 0, 0.2);
         }
 
+        .button {
+            background-color: #b78c46;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s ease-in-out;
+        }
+
+        .button:hover {
+            background-color: #ffd700;
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
+        }
     </style>
 </head>
 <body>
+    <header>
+        <h1>La Boda de Jorge y Bárbara</h1>
+        <p>¡Nos casamos! Acompáñanos a celebrar este día especial.</p>
+    </header>
+    
+    <div class="container">
+        <!-- Sección de la galería de fotos movida arriba -->
+        <section>
+            <h2>Galería de Fotos</h2>
+            <div class="gallery" id="photo-gallery">
+                <!-- Aquí se mostrarán las fotos subidas -->
+            </div>
+            <div class="form-container">
+                <h3>Sube tus fotos aquí</h3>
+                <input type="file" id="photo-upload" accept="image/*">
+                <button class="button" onclick="uploadPhoto()">Subir Foto</button>
+            </div>
+        </section>
 
-<header>
-    <h1>Bienvenidos a la Boda de Jorge y Barbar</h1>
-</header>
+        <!-- Detalles del evento -->
+        <section>
+            <h2>Detalles del Evento</h2>
+            <p><strong>Novios:</strong> Jorge Castillo &amp; Bárbara Quevedo</p>
+            <p><strong>Fecha:</strong> 27 de septiembre de 2025</p>
+            <p><strong>Hora:</strong> 18:00</p>
+            <p><strong>Lugar de la ceremonia:</strong> Catedral de Antofagasta</p>
+            <p><strong>Dirección:</strong> A establecer</p>
+            <p><strong>Lugar de la celebración:</strong> A establecer</p>
+            <p><strong>Confirmación:</strong> Antes del 20 de julio de 2025</p>
+            <p><strong>Enviar confirmación a:</strong> <a href="mailto:jorge.djin@gmail.com" style="color: #b78c46;">jorge.djin@gmail.com</a></p>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Boda de Jorge & Bárbara. Todos los derechos reservados.</p>
+    </footer>
 
-<div class="content">
-
-    <section class="details">
-        <h2>Detalles de la Boda</h2>
-        <p><strong>Nombre de los novios:</strong> Jorge Castillo y Barbar Quevedo</p>
-        <p><strong>Fecha:</strong> 27 de septiembre de 2025</p>
-        <p><strong>Hora:</strong> 18:00</p>
-        <p><strong>Lugar de la ceremonia:</strong> Catedral de Antofagasta</p>
-        <p><strong>Dirección:</strong> (a establecer)</p>
-        <p><strong>Lugar de la celebración:</strong> (a establecer)</p>
-    </section>
-
-    <section class="confirmation">
-        <h2>Confirmación de Asistencia</h2>
-        <p>Por favor confirma tu asistencia antes del 20 de julio de 2025.</p>
-        <p><strong>Envía tu confirmación a:</strong> <a href="mailto:jorge.djin@gmail.com">jorge.djin@gmail.com</a></p>
-    </section>
-
-    <section class="upload-section">
-        <h2>Galería de Fotos</h2>
-        <p>¡Nos encantaría que compartas tus fotos de la boda!</p>
-        <input type="file" accept="image/*" id="photo-upload" />
-        <button onclick="uploadPhoto()">Subir Foto</button>
-
-        <div class="gallery" id="gallery">
-            <!-- Las fotos subidas se mostrarían aquí -->
-        </div>
-    </section>
-
-</div>
-
-<footer>
-    <p>&copy; 2025 Boda de Jorge y Barbar. Todos los derechos reservados.</p>
-</footer>
-
-<script>
-    // Función para simular la subida de una foto y mostrarla en la galería
-    function uploadPhoto() {
-        const fileInput = document.getElementById("photo-upload");
-        const gallery = document.getElementById("gallery");
-
-        if (fileInput.files && fileInput.files[0]) {
+    <script>
+        function uploadPhoto() {
+            const fileInput = document.getElementById('photo-upload');
+            const gallery = document.getElementById('photo-gallery');
             const file = fileInput.files[0];
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                const img = document.createElement("img");
-                img.src = e.target.result;
-                img.alt = "Foto subida";
-                gallery.appendChild(img);
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = event.target.result;
+                    gallery.appendChild(imgElement);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert("Por favor, selecciona una foto primero.");
             }
-
-            reader.readAsDataURL(file);
         }
-    }
-</script>
-
+    </script>
 </body>
 </html>
