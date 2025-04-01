@@ -52,11 +52,11 @@
 
         .carousel {
             display: flex;
-            overflow: hidden;
-            width: 100%;
+            align-items: center;
+            justify-content: center;
+            position: relative;
             max-width: 600px;
             margin: auto;
-            position: relative;
         }
 
         .carousel img {
@@ -67,6 +67,25 @@
 
         .carousel img.active {
             display: block;
+        }
+
+        .carousel button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .carousel .prev {
+            left: 10px;
+        }
+
+        .carousel .next {
+            right: 10px;
         }
 
         .form-container {
@@ -94,14 +113,16 @@
     <header>
         <h1>La Boda de Jorge y Bárbara</h1>
         <p>¡Nos casamos! Acompáñanos a celebrar este día especial.</p>
-        <img src="FOTO JUNTITOS.jpg" alt="Jorge y Bárbara" class="header-img">
+        <img src="/mnt/data/FOTO JUNTITOS.jpg" alt="Jorge y Bárbara" class="header-img">
     </header>
     
     <div class="container">
         <section>
             <h2>Galería de Fotos</h2>
             <div class="carousel" id="photo-carousel">
-                <!-- Imágenes agregadas dinámicamente -->
+                <button class="prev" onclick="prevPhoto()">&#10094;</button>
+                <img id="current-photo" class="active">
+                <button class="next" onclick="nextPhoto()">&#10095;</button>
             </div>
             <div class="form-container">
                 <input type="file" id="photo-upload" accept="image/*">
@@ -123,28 +144,45 @@
     </div>
 
     <script>
+        let photoList = [];
+        let currentIndex = 0;
+
         function uploadPhoto() {
             const fileInput = document.getElementById('photo-upload');
-            const carousel = document.getElementById('photo-carousel');
             const file = fileInput.files[0];
             
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
-                    const imgElement = document.createElement('img');
-                    imgElement.src = event.target.result;
-                    imgElement.classList.add('active');
-                    
-                    const existingImages = carousel.getElementsByTagName('img');
-                    if (existingImages.length > 0) {
-                        existingImages[0].classList.remove('active');
-                    }
-                    
-                    carousel.appendChild(imgElement);
+                    photoList.push(event.target.result);
+                    currentIndex = photoList.length - 1;
+                    updateCarousel();
                 };
                 reader.readAsDataURL(file);
             } else {
                 alert("Por favor, selecciona una foto primero.");
+            }
+        }
+
+        function updateCarousel() {
+            const imgElement = document.getElementById('current-photo');
+            if (photoList.length > 0) {
+                imgElement.src = photoList[currentIndex];
+                imgElement.classList.add('active');
+            }
+        }
+
+        function prevPhoto() {
+            if (photoList.length > 0) {
+                currentIndex = (currentIndex - 1 + photoList.length) % photoList.length;
+                updateCarousel();
+            }
+        }
+
+        function nextPhoto() {
+            if (photoList.length > 0) {
+                currentIndex = (currentIndex + 1) % photoList.length;
+                updateCarousel();
             }
         }
     </script>
