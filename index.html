@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #fff8f0; /* Fondo blanco suave */
+            background-color: #fff8f0;
             color: #6f4f1e;
             margin: 0;
             padding: 0;
@@ -20,12 +20,24 @@
             text-align: center;
             text-transform: uppercase;
             font-weight: bold;
+            position: relative;
         }
 
         h1 {
             margin: 0;
             font-size: 40px;
             text-shadow: 0 0 8px #ffd700;
+        }
+
+        .header-img {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            width: 150px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 3px solid #fff;
         }
 
         .container {
@@ -76,25 +88,13 @@
         .button:hover {
             background-color: #ffd700;
         }
-
-        .rsvp {
-            text-align: center;
-            padding: 20px;
-            background-color: #fff0e0;
-            margin-top: 40px;
-            border-radius: 10px;
-        }
-
-        .rsvp input {
-            padding: 10px;
-            margin-right: 10px;
-        }
     </style>
 </head>
 <body>
     <header>
         <h1>La Boda de Jorge y Bárbara</h1>
         <p>¡Nos casamos! Acompáñanos a celebrar este día especial.</p>
+        <img src="FOTO JUNTITOS.jpg" alt="Jorge y Bárbara" class="header-img">
     </header>
     
     <div class="container">
@@ -118,14 +118,8 @@
             <p><strong>Dirección:</strong> A establecer</p>
             <p><strong>Lugar de la celebración:</strong> A establecer</p>
             <p><strong>Confirmación:</strong> Antes del 20 de julio de 2025</p>
+            <p><strong>Confirma tu asistencia en este correo:</strong> <a href="mailto:jorge.djin@gmail.com" style="color: #b78c46;">jorge.djin@gmail.com</a></p>
         </section>
-    </div>
-
-    <div class="rsvp">
-        <h2>Confirma tu Asistencia</h2>
-        <input type="text" id="guest-name" placeholder="Tu Nombre">
-        <button class="button" onclick="confirmAttendance()">Confirmar</button>
-        <ul id="guest-list"></ul>
     </div>
 
     <script>
@@ -151,21 +145,6 @@
                 reader.readAsDataURL(file);
             } else {
                 alert("Por favor, selecciona una foto primero.");
-            }
-        }
-
-        function confirmAttendance() {
-            const nameInput = document.getElementById('guest-name');
-            const guestList = document.getElementById('guest-list');
-            const name = nameInput.value.trim();
-
-            if (name) {
-                const listItem = document.createElement('li');
-                listItem.textContent = name;
-                guestList.appendChild(listItem);
-                nameInput.value = "";
-            } else {
-                alert("Por favor, ingresa tu nombre.");
             }
         }
     </script>
