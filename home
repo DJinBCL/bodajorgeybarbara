@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Boda Jorge y Barbar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: gold;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .details, .confirmation {
+            margin-bottom: 30px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+        }
+
+        .details h2, .confirmation h2 {
+            color: gold;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .gallery img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .upload-section {
+            margin-bottom: 30px;
+        }
+
+        .upload-section h2 {
+            color: gold;
+        }
+
+        .upload-section input[type="file"] {
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        footer {
+            background-color: gold;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Bienvenidos a la Boda de Jorge y Barbar</h1>
+</header>
+
+<div class="content">
+
+    <section class="details">
+        <h2>Detalles de la Boda</h2>
+        <p><strong>Nombre de los novios:</strong> Jorge Castillo y Barbar Quevedo</p>
+        <p><strong>Fecha:</strong> 27 de septiembre de 2025</p>
+        <p><strong>Hora:</strong> 18:00</p>
+        <p><strong>Lugar de la ceremonia:</strong> Catedral de Antofagasta</p>
+        <p><strong>Dirección:</strong> (a establecer)</p>
+        <p><strong>Lugar de la celebración:</strong> (a establecer)</p>
+    </section>
+
+    <section class="confirmation">
+        <h2>Confirmación de Asistencia</h2>
+        <p>Por favor confirma tu asistencia antes del 20 de julio de 2025.</p>
+        <p><strong>Envía tu confirmación a:</strong> <a href="mailto:jorge.djin@gmail.com">jorge.djin@gmail.com</a></p>
+    </section>
+
+    <section class="upload-section">
+        <h2>Galería de Fotos</h2>
+        <p>¡Nos encantaría que compartas tus fotos de la boda!</p>
+        <input type="file" accept="image/*" id="photo-upload" />
+        <button onclick="uploadPhoto()">Subir Foto</button>
+
+        <div class="gallery" id="gallery">
+            <!-- Las fotos subidas se mostrarían aquí -->
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>&copy; 2025 Boda de Jorge y Barbar. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    // Función para simular la subida de una foto y mostrarla en la galería
+    function uploadPhoto() {
+        const fileInput = document.getElementById("photo-upload");
+        const gallery = document.getElementById("gallery");
+
+        if (fileInput.files && fileInput.files[0]) {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const img = document.createElement("img");
+                img.src = e.target.result;
+                img.alt = "Foto subida";
+                gallery.appendChild(img);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+</body>
+</html>
