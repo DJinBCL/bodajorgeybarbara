@@ -20,24 +20,12 @@
             text-align: center;
             text-transform: uppercase;
             font-weight: bold;
-            position: relative;
         }
 
         h1 {
             margin: 0;
             font-size: 40px;
             text-shadow: 0 0 8px #ffd700;
-        }
-
-        .header-img {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            width: 150px;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 3px solid #fff;
         }
 
         .container {
@@ -116,7 +104,6 @@
     <header>
         <h1>La Boda de Jorge y Bárbara</h1>
         <p>¡Nos casamos! Acompáñanos a celebrar este día especial.</p>
-        <img src="FOTO JUNTITOS.jpg" alt="Jorge y Bárbara" class="header-img">
     </header>
     
     <div class="container">
@@ -130,7 +117,7 @@
                 <button class="carousel-btn next" onclick="nextPhoto()">&#10095;</button>
             </div>
             <div class="form-container">
-                <input type="file" id="photo-upload" accept="image/*">
+                <input type="file" id="photo-upload" accept="image/*" multiple>
                 <button class="button" onclick="uploadPhoto()">Subir Foto</button>
             </div>
         </section>
@@ -150,43 +137,45 @@
 
     <script>
         let currentIndex = 0;
+        
         function uploadPhoto() {
             const fileInput = document.getElementById('photo-upload');
             const carousel = document.getElementById('photo-carousel');
-            const file = fileInput.files[0];
+            const files = fileInput.files;
             
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const imgElement = document.createElement('img');
-                    imgElement.src = event.target.result;
-                    
-                    if (carousel.children.length === 0) {
-                        imgElement.classList.add('active');
-                    }
-                    
-                    carousel.appendChild(imgElement);
-                };
-                reader.readAsDataURL(file);
+            if (files.length > 0) {
+                for (let file of files) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = event.target.result;
+                        carousel.appendChild(imgElement);
+                    };
+                    reader.readAsDataURL(file);
+                }
             } else {
-                alert("Por favor, selecciona una foto primero.");
+                alert("Por favor, selecciona al menos una foto.");
             }
         }
 
         function prevPhoto() {
             const images = document.querySelectorAll('.carousel img');
             if (images.length === 0) return;
-            images[currentIndex].classList.remove('active');
             currentIndex = (currentIndex - 1 + images.length) % images.length;
-            images[currentIndex].classList.add('active');
+            updateCarousel();
         }
 
         function nextPhoto() {
             const images = document.querySelectorAll('.carousel img');
             if (images.length === 0) return;
-            images[currentIndex].classList.remove('active');
             currentIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].classList.add('active');
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const images = document.querySelectorAll('.carousel img');
+            const offset = -currentIndex * 600;
+            document.getElementById('photo-carousel').style.transform = `translateX(${offset}px)`;
         }
     </script>
 </body>
