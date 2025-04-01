@@ -50,26 +50,27 @@
             margin-bottom: 40px;
         }
 
-        .carousel {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .carousel-container {
             position: relative;
             max-width: 600px;
             margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
         }
 
         .carousel img {
-            width: 100%;
-            display: none;
+            width: 600px;
+            height: 400px;
+            object-fit: cover;
             border-radius: 8px;
         }
 
-        .carousel img.active {
-            display: block;
-        }
-
-        .carousel button {
+        .carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -78,13 +79,15 @@
             border: none;
             padding: 10px;
             cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
         }
 
-        .carousel .prev {
+        .prev {
             left: 10px;
         }
 
-        .carousel .next {
+        .next {
             right: 10px;
         }
 
@@ -113,16 +116,18 @@
     <header>
         <h1>La Boda de Jorge y Bárbara</h1>
         <p>¡Nos casamos! Acompáñanos a celebrar este día especial.</p>
-        <img src="/mnt/data/FOTO JUNTITOS.jpg" alt="Jorge y Bárbara" class="header-img">
+        <img src="FOTO JUNTITOS.jpg" alt="Jorge y Bárbara" class="header-img">
     </header>
     
     <div class="container">
         <section>
             <h2>Galería de Fotos</h2>
-            <div class="carousel" id="photo-carousel">
-                <button class="prev" onclick="prevPhoto()">&#10094;</button>
-                <img id="current-photo" class="active">
-                <button class="next" onclick="nextPhoto()">&#10095;</button>
+            <div class="carousel-container">
+                <button class="carousel-btn prev" onclick="prevPhoto()">&#10094;</button>
+                <div class="carousel" id="photo-carousel">
+                    <!-- Imágenes agregadas dinámicamente -->
+                </div>
+                <button class="carousel-btn next" onclick="nextPhoto()">&#10095;</button>
             </div>
             <div class="form-container">
                 <input type="file" id="photo-upload" accept="image/*">
@@ -144,19 +149,23 @@
     </div>
 
     <script>
-        let photoList = [];
         let currentIndex = 0;
-
         function uploadPhoto() {
             const fileInput = document.getElementById('photo-upload');
+            const carousel = document.getElementById('photo-carousel');
             const file = fileInput.files[0];
             
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
-                    photoList.push(event.target.result);
-                    currentIndex = photoList.length - 1;
-                    updateCarousel();
+                    const imgElement = document.createElement('img');
+                    imgElement.src = event.target.result;
+                    
+                    if (carousel.children.length === 0) {
+                        imgElement.classList.add('active');
+                    }
+                    
+                    carousel.appendChild(imgElement);
                 };
                 reader.readAsDataURL(file);
             } else {
@@ -164,26 +173,20 @@
             }
         }
 
-        function updateCarousel() {
-            const imgElement = document.getElementById('current-photo');
-            if (photoList.length > 0) {
-                imgElement.src = photoList[currentIndex];
-                imgElement.classList.add('active');
-            }
-        }
-
         function prevPhoto() {
-            if (photoList.length > 0) {
-                currentIndex = (currentIndex - 1 + photoList.length) % photoList.length;
-                updateCarousel();
-            }
+            const images = document.querySelectorAll('.carousel img');
+            if (images.length === 0) return;
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            images[currentIndex].classList.add('active');
         }
 
         function nextPhoto() {
-            if (photoList.length > 0) {
-                currentIndex = (currentIndex + 1) % photoList.length;
-                updateCarousel();
-            }
+            const images = document.querySelectorAll('.carousel img');
+            if (images.length === 0) return;
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
         }
     </script>
 </body>
