@@ -1,182 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boda de Jorge y Bárbara</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fff8f0;
-            color: #6f4f1e;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boda de Jorge y Bárbara</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://drive.google.com/uc?export=view&id=1g9P0_9ejv3kchZCde2zy9uFyTUSv5mjm');
+      background-size: cover;
+      background-position: center;
+      color: #d4af37; /* oro opaco claro */
+    }
 
-        header {
-            background: linear-gradient(135deg, #ffd700, #b78c46);
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
+    header {
+      background: transparent;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: bold;
+      padding: 30px 0;
+    }
 
-        h1 {
-            margin: 0;
-            font-size: 40px;
-            text-shadow: 0 0 8px #ffd700;
-        }
+    h1 {
+      margin: 0;
+      font-size: 48px;
+      background: linear-gradient(90deg, #fffbd0, #ffd700, #fffbd0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 1px 1px 8px rgba(255, 215, 0, 0.7);
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 40px 20px;
+      gap: 30px;
+    }
 
-        section {
-            margin-bottom: 40px;
-        }
+    .info {
+      flex: 1;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+    }
 
-        .carousel-container {
-            position: relative;
-            max-width: 600px;
-            margin: auto;
-            overflow: hidden;
-        }
+    .info h2 {
+      margin-top: 0;
+      color: #c2a129; /* tono dorado opaco */
+    }
 
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            width: 100%;
-        }
+    .info p {
+      margin: 10px 0;
+    }
 
-        .carousel img {
-            width: 600px;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
+    .photo-right {
+      flex-shrink: 0;
+    }
 
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 18px;
-            border-radius: 5px;
-        }
+    .photo-right img {
+      width: 400px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
 
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
-        }
-
-        .form-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .button {
-            background-color: #b78c46;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .button:hover {
-            background-color: #ffd700;
-        }
-    </style>
+    a {
+      color: #b78c46;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>La Boda de Jorge y Bárbara</h1>
-        <p>¡Nos casamos! Acompáñanos a celebrar este día especial.</p>
-    </header>
-    
-    <div class="container">
-        <section>
-            <h2>Galería de Fotos</h2>
-            <div class="carousel-container">
-                <button class="carousel-btn prev" onclick="prevPhoto()">&#10094;</button>
-                <div class="carousel" id="photo-carousel">
-                    <!-- Imágenes agregadas dinámicamente -->
-                </div>
-                <button class="carousel-btn next" onclick="nextPhoto()">&#10095;</button>
-            </div>
-            <div class="form-container">
-                <input type="file" id="photo-upload" accept="image/*" multiple>
-                <button class="button" onclick="uploadPhoto()">Subir Foto</button>
-            </div>
-        </section>
+  <header>
+    <h1>La Boda de Jorge y Bárbara</h1>
+    <p style="font-size: 20px;">¡Nos casamos! Acompáñanos a celebrar este día especial.</p>
+  </header>
 
-        <section>
-            <h2>Detalles del Evento</h2>
-            <p><strong>Novios:</strong> Jorge Castillo &amp; Bárbara Quevedo</p>
-            <p><strong>Fecha:</strong> 27 de septiembre de 2025</p>
-            <p><strong>Hora:</strong> 18:00</p>
-            <p><strong>Lugar de la ceremonia:</strong> Catedral de Antofagasta - Parroquia San José</p>
-            <p><strong>Dirección:</strong> José de San Martín 2634 - Antofagasta</p>
-            <p><strong>Lugar de la celebración:</strong> Hotel Antofagasta - Av. Balmaceda 2575</p>
-            <p><strong>Confirmación:</strong> Antes del 27 de junio de 2025</p>
-            <p><strong>Confirma tu asistencia enviando un correo a:</strong> <a href="mailto:jorge.djin@gmail.com" style="color: #b78c46;">jorge.djin@gmail.com</a></p>
-        </section>
+  <div class="container">
+    <div class="info">
+      <h2>Detalles del Evento</h2>
+      <p><strong>Novios:</strong> Jorge Castillo &amp; Bárbara Quevedo</p>
+      <p><strong>Fecha:</strong> 27 de septiembre de 2025</p>
+      <p><strong>Hora:</strong> 18:00</p>
+      <p><strong>Lugar de la ceremonia:</strong> Catedral de Antofagasta - Parroquia San José</p>
+      <p><strong>Dirección:</strong> José de San Martín 2634 - Antofagasta</p>
+      <p><strong>Lugar de la celebración:</strong> Hotel Antofagasta - Av. Balmaceda 2575</p>
+      <p><strong>Confirmación:</strong> Antes del 27 de junio de 2025</p>
+      <p><strong>Confirma tu asistencia enviando un correo a:</strong> <a href="mailto:jorge.djin@gmail.com">jorge.djin@gmail.com</a></p>
     </div>
 
-    <script>
-        let currentIndex = 0;
-        
-        function uploadPhoto() {
-            const fileInput = document.getElementById('photo-upload');
-            const carousel = document.getElementById('photo-carousel');
-            const files = fileInput.files;
-            
-            if (files.length > 0) {
-                for (let file of files) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        const imgElement = document.createElement('img');
-                        imgElement.src = event.target.result;
-                        carousel.appendChild(imgElement);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            } else {
-                alert("Por favor, selecciona al menos una foto.");
-            }
-        }
-
-        function prevPhoto() {
-            const images = document.querySelectorAll('.carousel img');
-            if (images.length === 0) return;
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            updateCarousel();
-        }
-
-        function nextPhoto() {
-            const images = document.querySelectorAll('.carousel img');
-            if (images.length === 0) return;
-            currentIndex = (currentIndex + 1) % images.length;
-            updateCarousel();
-        }
-
-        function updateCarousel() {
-            const images = document.querySelectorAll('.carousel img');
-            const offset = -currentIndex * 600;
-            document.getElementById('photo-carousel').style.transform = `translateX(${offset}px)`;
-        }
-    </script>
+    <div class="photo-right">
+      <img src="https://drive.google.com/uc?export=view&id=1phSttYewncKCa2o5xLPbmWBshyq7HY8_" alt="Jorge y Bárbara">
+    </div>
+  </div>
 </body>
 </html>
