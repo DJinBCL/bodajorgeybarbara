@@ -6,66 +6,77 @@
   <title>Boda de Jorge y Bárbara</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
       background-image: url('https://drive.google.com/uc?export=view&id=1g9P0_9ejv3kchZCde2zy9uFyTUSv5mjm');
       background-size: cover;
       background-position: center;
-      color: #d4af37; /* oro opaco claro */
+      background-attachment: fixed;
+      color: #d6b66b;
     }
 
     header {
-      background: transparent;
+      background: rgba(0, 0, 0, 0.5);
+      color: #ffd700;
+      padding: 30px 0;
       text-align: center;
       text-transform: uppercase;
       font-weight: bold;
-      padding: 30px 0;
     }
 
     h1 {
       margin: 0;
-      font-size: 48px;
-      background: linear-gradient(90deg, #fffbd0, #ffd700, #fffbd0);
+      font-size: 50px;
+      background: linear-gradient(90deg, #fff7cc, #ffd700, #b8860b, #fff7cc);
+      background-size: 200% auto;
+      color: transparent;
+      background-clip: text;
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 1px 1px 8px rgba(255, 215, 0, 0.7);
+      animation: shine 3s linear infinite;
+    }
+
+    @keyframes shine {
+      to {
+        background-position: -200% center;
+      }
     }
 
     .container {
       max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 40px 20px;
-      gap: 30px;
-    }
-
-    .info {
-      flex: 1;
-      background-color: rgba(255, 255, 255, 0.8);
+      margin: 40px auto;
       padding: 20px;
-      border-radius: 10px;
+      background-color: rgba(255, 248, 240, 0.85);
+      display: flex;
+      align-items: flex-start;
+      gap: 30px;
+      border-radius: 12px;
     }
 
-    .info h2 {
-      margin-top: 0;
-      color: #c2a129; /* tono dorado opaco */
+    .details {
+      flex: 1;
     }
 
-    .info p {
-      margin: 10px 0;
+    .details h2 {
+      color: #cfa93f;
     }
 
-    .photo-right {
-      flex-shrink: 0;
+    .details p {
+      font-size: 18px;
+      line-height: 1.6;
     }
 
-    .photo-right img {
-      width: 400px;
-      border-radius: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    .photo {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .photo img {
+      max-width: 100%;
+      max-height: 500px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
     }
 
     a {
@@ -76,11 +87,11 @@
 <body>
   <header>
     <h1>La Boda de Jorge y Bárbara</h1>
-    <p style="font-size: 20px;">¡Nos casamos! Acompáñanos a celebrar este día especial.</p>
+    <p>¡Nos casamos! Acompáñanos a celebrar este día especial.</p>
   </header>
 
   <div class="container">
-    <div class="info">
+    <div class="details">
       <h2>Detalles del Evento</h2>
       <p><strong>Novios:</strong> Jorge Castillo &amp; Bárbara Quevedo</p>
       <p><strong>Fecha:</strong> 27 de septiembre de 2025</p>
@@ -89,11 +100,13 @@
       <p><strong>Dirección:</strong> José de San Martín 2634 - Antofagasta</p>
       <p><strong>Lugar de la celebración:</strong> Hotel Antofagasta - Av. Balmaceda 2575</p>
       <p><strong>Confirmación:</strong> Antes del 27 de junio de 2025</p>
-      <p><strong>Confirma tu asistencia enviando un correo a:</strong> <a href="mailto:jorge.djin@gmail.com">jorge.djin@gmail.com</a></p>
+      <p><strong>Confirma tu asistencia enviando un correo a:</strong>
+        <a href="mailto:jorge.djin@gmail.com">jorge.djin@gmail.com</a>
+      </p>
     </div>
 
-    <div class="photo-right">
-      <img src="https://drive.google.com/uc?export=view&id=1phSttYewncKCa2o5xLPbmWBshyq7HY8_" alt="Jorge y Bárbara">
+    <div class="photo">
+      <img src="https://drive.google.com/uc?export=view&id=1phSttYewncKCa2o5xLPbmWBshyq7HY8_" alt="Jorge y Bárbara" />
     </div>
   </div>
 </body>
